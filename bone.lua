@@ -4,7 +4,7 @@
 ]]
 
 include("lib/vec.lua")
-include("skeleton/transform.lua")
+include("picotron-skeleton/transform.lua")
 
 Bone = {}
 Bone.__index = Bone

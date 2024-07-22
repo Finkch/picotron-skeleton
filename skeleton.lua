@@ -5,9 +5,9 @@
 
 ]]
 
-include("skeleton/bone.lua")
-include("skeleton/necromancer.lua")
-include("skeleton/transform.lua")
+include("picotron-skeleton/bone.lua")
+include("picotron-skeleton/necromancer.lua")
+include("picotron-skeleton/transform.lua")
 
 Skeleton = {}
 Skeleton.__index = Skeleton

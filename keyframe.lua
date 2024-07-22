@@ -7,7 +7,7 @@
 
 include("lib/tstr.lua")
 
-include("skeleton/transform.lua")
+include("picotron-skeleton/transform.lua")
 
 Keyframe = {}
 Keyframe.__index = Keyframe

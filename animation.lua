@@ -4,7 +4,7 @@
 
 ]]
 
-include("skeleton/keyframe.lua")
+include("picotron-skeleton/keyframe.lua")
 
 include("lib/tstr.lua")
 

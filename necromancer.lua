@@ -6,7 +6,7 @@
 
 ]]
 
-include("skeleton/animation.lua")
+include("picotron-skeleton/animation.lua")
 
 include("lib/tstr.lua")
 

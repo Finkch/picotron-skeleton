@@ -6,12 +6,12 @@
 include("lib/tstr.lua")
 include("lib/vec.lua")
 
-include("skeleton/skeleton.lua")
-include("skeleton/bone.lua")
-include("skeleton/necromancer.lua")
-include("skeleton/animation.lua")
-include("skeleton/keyframe.lua")
-include("skeleton/transform.lua")
+include("picotron-skeleton/skeleton.lua")
+include("picotron-skeleton/bone.lua")
+include("picotron-skeleton/necromancer.lua")
+include("picotron-skeleton/animation.lua")
+include("picotron-skeleton/keyframe.lua")
+include("picotron-skeleton/transform.lua")
 
 
 
