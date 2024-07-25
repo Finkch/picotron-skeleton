@@ -37,10 +37,10 @@ end
 
 function Skin:draw(bone, offset)
 
-    if (self.ismap) then
+    -- grabs the bone's range
+    local s, e = bone:span(self.offset + offset)
 
-        -- grabs the bone's range
-        local s, e = bone:span(self.offset + offset)
+    if (self.ismap) then
 
         -- grabs texture element range
         local ts, te = self.toffset, self.toffset + self.tsize
@@ -54,13 +54,7 @@ function Skin:draw(bone, offset)
             te.x, te.y      -- texture x1, y1
         )
     else
-        local pos = self.offset + offset
-
-        spr(
-            self.sn,
-            pos.x,
-            pos.y
-        )
+        spr(self.sn, s.x, s.y)
     end
 end
 
