@@ -32,7 +32,7 @@ function Skin:new(sprite_num, offset)
 end
 
 function Skin:span(offset)
-    return self.bone:span(offset)
+    return self.bone:span(offset + self.offset)
 end
 
 function Skin:draw(offset)
