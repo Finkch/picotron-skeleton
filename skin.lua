@@ -23,23 +23,28 @@ function Skin:new(sprite_num, offset)
 
     local s = {
         sn = sprite_num,
-        offset = offset
+        offset = offset,
+        bone = nil  -- reference to bone that wears this skin
     }
 
     setmetatable(s, Skin)
     return s
 end
 
-function Skin:draw(bone, offset)
+function Skin:span(offset)
+    return self.bone:spawn(offset)
+end
+
+function Skin:draw(offset)
 
     -- grabs the bone's range
-    local s, e = bone:span(self.offset + offset)
+    local s, e = self:span(offset)
 
     spr(self.sn, s.x, s.y)
 end
 
 function Skin:__tostring()
-    local str   = "Skin (#" .. self.sprite .. ")"
+    local str   = "Skin (#" .. self.sprite .. ", " .. self.bone.name .. ")"
     str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y
     str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ")"
 
@@ -75,10 +80,10 @@ function TextureSkin:new(sprite_num, offset, tsize, toffset)
     return ts
 end
 
-function TextureSkin:draw(bone, offset)
+function TextureSkin:draw(offset)
 
     -- grabs the bone's range
-    local s, e = bone:span(self.offset + offset)
+    local s, e = self:span(offset)
 
     -- grabs texture element range
     local ts, te = self.toffset, self.toffset + self.tsize
@@ -94,7 +99,7 @@ function TextureSkin:draw(bone, offset)
 end
 
 function Skin:__tostring()
-    local str   = "Skin (#" .. self.sprite .. ")"
+    local str   = "Skin (#" .. self.sprite .. ", " .. self.bone.name .. ")"
     str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y .. " <- " .. self.tsize.x .. "x" .. self.tsize.y
     str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ") <- (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
 
@@ -124,11 +129,15 @@ function RSkin:new(sprite_num, offset, joint)
     return rs
 end
 
+function RSkin:rotation()
+    return self.bone.transform.rot
+end
+
 function RSkin:draw(bone, offset)
 
     -- grabs the bone's range
-    local s, e = bone:span(self.offset + offset)
-    self.rot = bone.transform.rot
+    local s, e = self:span(offset)
+    self.rot = self:rotation()
 
     rspr(
         self.sn,    -- sprite number

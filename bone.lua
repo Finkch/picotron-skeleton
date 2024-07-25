@@ -36,7 +36,7 @@ function Bone:draw(offset)
     
     -- draws skin
     if (self.skin) then
-        self.skin:draw(self, offset)
+        self.skin:draw(offset)
 
     -- otherwise debug draw joint and bone
     elseif (self.skeleton.debug) then
@@ -53,6 +53,7 @@ function Bone:add(child)
         add(self.children, child)
     elseif(child.__parenttype == "skin") then
         self.skin = child
+        child.bone = self
     else
         error("unrecognised child type \"" .. type(child) .. "\" (" .. tostr(child.__type) .. ")")
     end
