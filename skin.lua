@@ -5,6 +5,7 @@
 
 include("lib/vec.lua")
 include("lib/tstr.lua")
+include("lib/rspr.lua")
 
 
 --[[
@@ -29,7 +30,6 @@ function Skin:new(sprite_num, offset)
     return s
 end
 
-
 function Skin:draw(bone, offset)
 
     -- grabs the bone's range
@@ -38,8 +38,6 @@ function Skin:draw(bone, offset)
     spr(self.sn, s.x, s.y)
 end
 
-
--- metamethods
 function Skin:__tostring()
     local str   = "Skin (#" .. self.sprite .. ")"
     str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y
@@ -77,7 +75,6 @@ function TextureSkin:new(sprite_num, offset, tsize, toffset)
     return ts
 end
 
-
 function TextureSkin:draw(bone, offset)
 
     -- grabs the bone's range
@@ -96,11 +93,55 @@ function TextureSkin:draw(bone, offset)
     )
 end
 
--- metamethods
 function Skin:__tostring()
     local str   = "Skin (#" .. self.sprite .. ")"
     str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y .. " <- " .. self.tsize.x .. "x" .. self.tsize.y
     str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ") <- (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
+
+    return str
+end
+
+
+
+--[[
+    a sprite that can rotate...shoddily.
+    this is why TextureSkins are limited to 1 width: rspr does not look great.
+    nevertheless, if necessary, here it can be used.
+
+]]
+
+RSkin = {}
+RSkin.__index = RSkin
+RSkin.__type = "rskin"
+setmetatable(RSkin, Skin)
+
+function RSkin:new(sprite_num, offset, joint)
+    local rs = Skin:new(sprite_num, offset)
+    rs["joint"] = joint
+    rs["sprite"] = get_spr(sprite_num)
+
+    setmetatable(rs, RSkin)
+    return rs
+end
+
+function RSkin:draw(bone, offset)
+
+    -- grabs the bone's range
+    local s, e = bone:span(self.offset + offset)
+    self.rot = bone.transform.rot
+
+    rspr(
+        self.sn,    -- sprite number
+        s,          -- position
+        self.rot,   -- rotation amount
+        self.joint  -- rotation centre
+    )
+end
+
+function RSkin:__tostring()
+    local str = Skin.__tostring(self)
+    str ..= "-> joint:\t" .. self.joint.x .. ", " .. self.joint.y
+    str ..= "-> rotation:\t" .. self.rot
 
     return str
 end
