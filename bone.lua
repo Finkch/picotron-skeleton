@@ -154,6 +154,9 @@ function Bone:__tostring()
     end
     if (#self.children == 0) str ..= "nil"
 
+    -- shows skin
+    if (self.skin) str ..= "\n-> " .. tostr(self.skin)
+
     -- shows transform
     str ..= "\n-> " .. tostr(self.transform)
 
