@@ -133,7 +133,7 @@ function RSkin:rotation()
     return self.bone.transform.rot
 end
 
-function RSkin:draw(bone, offset)
+function RSkin:draw(offset)
 
     -- grabs the bone's range
     local s, e = self:span(offset)
