@@ -211,7 +211,7 @@ end
 function ProceduralNecromancer:interpolate(current, goal)
     local pose = {}
     for target in all(self.targets) do
-        return pose[target] = self:_interpolate(current[target], goal[target])
+        pose[target] = self:_interpolate(current[target], goal[target])
     end
     return pose
 end
