@@ -45,7 +45,7 @@ function Skin:draw(bone)
         s.x, s.y,   -- x0, y0
         e.x, e.y,   -- x1, y1
         ts.x, ts.y, -- texture x0, y0
-        te.x, te.y, -- texture x1, y1
+        te.x, te.y  -- texture x1, y1
     )
 end
 
