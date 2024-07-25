@@ -204,7 +204,7 @@ function ProceduralNecromancer:get()
     return pose
 end
 
-function ProceduralNecromancer:_get(target)
+function ProceduralNecromancer:_get(bone)
     return Transform:new()
 end
 
