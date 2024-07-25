@@ -13,11 +13,9 @@ Skin.__type = "skin"
 function Skin:new(sprite, offset, tsize, toffset)
     sprite = get_spr(sprite)
     
-    if (not offset) offset = Vec:new()
-    if (not toffset) toffset = Vec:new()
-    if (not tsize) then
-        tsize = Vec:new(sprite:get_width() - 1, sprite:get_height() - 1)
-    end
+    if (not offset)     offset = Vec:new()
+    if (not toffset)    toffset = Vec:new()
+    if (not tsize)      tsize = Vec:new(sprite:width() - 1, sprite:height() - 1)
     
     local s = {
         sprite = sprite,    -- sprite id of the texture element
