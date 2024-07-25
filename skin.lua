@@ -39,11 +39,11 @@ function Skin:draw(bone, offset)
 
     -- draws a textured line
     tline3d(
-        sprite,     -- sprite data
-        s.x, s.y,   -- x0, y0
-        e.x, e.y,   -- x1, y1
-        ts.x, ts.y, -- texture x0, y0
-        te.x, te.y  -- texture x1, y1
+        self.sprite,    -- sprite data
+        s.x, s.y,       -- x0, y0
+        e.x, e.y,       -- x1, y1
+        ts.x, ts.y,     -- texture x0, y0
+        te.x, te.y      -- texture x1, y1
     )
 end
 
