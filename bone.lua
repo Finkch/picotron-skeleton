@@ -33,10 +33,14 @@ end
 
 -- draws the bone
 function Bone:draw(offset)
-    local s, e = self:span(offset)
+    
+    -- draws skin
+    if (self.skin) then
+        self.skin:draw(self)
 
-    -- for now, just draws a red line and a circle
-    if (self.skeleton.debug) then
+    -- otherwise debug draw joint and bone
+    elseif (self.skeleton.debug) then
+        local s, e = self:span(offset)
         line(s.x, s.y, e.x, e.y, 18)
         circfill(s.x, s.y, 1, 2)
     end
@@ -45,7 +49,13 @@ end
 
 -- adds child
 function Bone:add(child)
-    add(self.children, child)
+    if (child.__type == "bone") then
+        add(self.children, child)
+    elseif(child.__type == "skin") then
+        self.skin = child
+    else
+        error("unrecognised child type \"" .. type(child) .. "\" (" .. tostr(child.__type) .. ")")
+    end
 end
 
 -- gets the tip of the bone
