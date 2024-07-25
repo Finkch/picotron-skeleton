@@ -173,10 +173,7 @@ function ProceduralNecromancer:update()
 
     -- gets current transforms.
     -- equivalent to previous keyframe
-    local current = {}
-    for target in all(self.targets) do
-        add(current, self.skeleton.bones[target].transform)
-    end
+    local current = self:get_current()
 
     -- return no change if paused
     if (self.paused) return current
@@ -196,6 +193,19 @@ end
     
 ]] 
 
+function ProceduralNecromancer:get_current()
+    local pose = {}
+    for target in all(self.targets) do
+        pose[target] = self:_get_current(target)
+    end
+    return pose
+end
+
+function ProceduralNecromancer:_get_current(bone)
+    return self.skeleton.bones[bone].transform
+end
+
+
 function ProceduralNecromancer:get()
     local pose = {}
     for target in all(self.targets) do
@@ -207,6 +217,7 @@ end
 function ProceduralNecromancer:_get(bone)
     return Transform:new()
 end
+
 
 function ProceduralNecromancer:interpolate(current, goal)
     local pose = {}
