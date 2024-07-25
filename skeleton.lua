@@ -167,6 +167,7 @@ function ProceduralSkeleton:new(core, necromancer, debug)
     ps["necromancers"] = {}
 
     setmetatable(ps, ProceduralSkeleton)
+    return ps
 end
 
 -- updates skeleton
