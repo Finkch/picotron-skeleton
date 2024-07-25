@@ -159,7 +159,7 @@ end
 
 ProceduralSkeleton = {}
 ProceduralSkeleton.__index = ProceduralSkeleton
-ProceduralSkeleton = "proceduralskeleton"
+ProceduralSkeleton.__type = "proceduralskeleton"
 setmetatable(ProceduralSkeleton, Skeleton)
 
 function ProceduralSkeleton:new(core, necromancer, debug)
