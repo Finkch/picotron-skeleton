@@ -36,7 +36,7 @@ function Bone:draw(offset)
     
     -- draws skin
     if (self.skin) then
-        self.skin:draw(self)
+        self.skin:draw(self, offset)
 
     -- otherwise debug draw joint and bone
     elseif (self.skeleton.debug) then

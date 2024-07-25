@@ -31,10 +31,10 @@ function Skin:new(sprite, offset, tsize, toffset)
 end
 
 
-function Skin:draw(bone)
+function Skin:draw(bone, offset)
 
     -- grabs the bone's range
-    local s, e = bone:span(self.offset)
+    local s, e = bone:span(self.offset + offset)
 
     -- grabs texture element range
     local ts, te = self.toffset, self.toffset + self.tsize
