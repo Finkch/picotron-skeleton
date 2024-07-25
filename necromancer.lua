@@ -181,6 +181,8 @@ function ProceduralNecromancer:update()
     -- return no change if paused
     if (self.paused) return current
 
+    self.frame += 1
+
     -- gets the target rotations
     local goal = self:get()
 
