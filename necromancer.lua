@@ -7,6 +7,7 @@
 ]]
 
 include("picotron-skeleton/animation.lua")
+include("picotron-skeleton/transform.lua")
 
 include("lib/tstr.lua")
 
@@ -145,4 +146,66 @@ function Necromancer:__tostring()
     tbl["animations"] = self.animations
 
     return "Necromancer" .. tstr(tbl)
+end
+
+
+
+--[[
+    procedural necromancers are necromancers that, get this,
+    use procedural animation.
+
+]]
+
+ProceduralNecromancer = {}
+ProceduralNecromancer.__index = ProceduralNecromancer
+ProceduralNecromancer.__type = "proceduralnecromancer"
+setmetatable(ProceduralNecromancer, Necromancer)
+
+function ProceduralNecromancer:new(targets)
+    local pn = Necromancer:new()
+    pn["targets"] = targets -- which bones this necromancer cares about
+
+    setmetatable(pn, ProceduralNecromancer)
+    return pn
+end
+
+function ProceduralNecromancer:update()
+
+    -- gets current transforms.
+    -- equivalent to previous keyframe
+    local current = {}
+    for target in all(self.targets) do
+        add(current, self.skeleton.bones[target].transform)
+    end
+
+    -- return no change if paused
+    if (self.paused) return current
+
+    -- gets the target rotations
+    local goal = self:get()
+
+    -- interpolates
+    return self:interpolate(current, goal)
+end
+
+
+--[[
+    the following methods are intended to be overridden!
+    
+]] 
+
+function ProceduralNecromancer:get()
+    local pose = {}
+    for target in all(self.targets) do
+        pose[target] = self:_get(target)
+    end
+    return pose
+end
+
+function ProceduralNecromancer:_get(target)
+    return Transform:new()
+end
+
+function ProceduralNecromancer:interpolate(current, goal)
+    return goal
 end
