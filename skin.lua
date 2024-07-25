@@ -15,6 +15,7 @@ include("lib/tstr.lua")
 Skin = {}
 Skin.__index = Skin
 Skin.__type = "skin"
+Skin.__parenttype = "skin"
 
 function Skin:new(sprite_num, offset)
     if (not offset) offset = Vec:new()

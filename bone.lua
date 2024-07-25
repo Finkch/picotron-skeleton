@@ -51,7 +51,7 @@ end
 function Bone:add(child)
     if (child.__type == "bone") then
         add(self.children, child)
-    elseif(child.__type == "skin") then
+    elseif(child.__parenttype == "skin") then
         self.skin = child
     else
         error("unrecognised child type \"" .. type(child) .. "\" (" .. tostr(child.__type) .. ")")
