@@ -147,3 +147,50 @@ function Skeleton:__tostring()
 
     return str
 end
+
+
+
+
+--[[
+    a procedural skeleton is one where in addition to a main necromancer,
+    procedural animation can be used of specified limbs
+
+]]
+
+ProceduralSkeleton = {}
+ProceduralSkeleton.__index = ProceduralSkeleton
+ProceduralSkeleton = "proceduralskeleton"
+setmetatable(ProceduralSkeleton, Skeleton)
+
+function ProceduralSkeleton:new(core, necromancer, debug)
+    local ps = Skeleton:new(core, necromancer, debug)
+    ps["necromancers"] = {}
+
+    setmetatable(ps, ProceduralSkeleton)
+end
+
+-- updates skeleton
+function ProceduralSkeleton:update()
+
+    -- gets the regular animation pose
+    local pose = self.necromancer:update()
+
+    -- adds the suggested change given by all other necromancers
+    for necromancer in all(self.necromancers) do
+        if (not necromancer.paused) then
+            local new_pose = necromancer:update()
+
+            for bone, transform in pairs(new_pose) do
+                pose[bone] += new_pose[bone]
+            end
+        end
+    end
+
+    self:dance(pose)
+end
+
+-- adds a procedural necromancer to the array
+function ProceduralSkeleton:addnecromancer(necromancer)
+    necromancer.skeleton = self
+    add(self.necromancers, necromancer)
+end
