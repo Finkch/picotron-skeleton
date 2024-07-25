@@ -209,5 +209,13 @@ function ProceduralNecromancer:_get(bone)
 end
 
 function ProceduralNecromancer:interpolate(current, goal)
+    local pose = {}
+    for target in all(self.targets) do
+        return pose[target] = self:_interpolate(current[target], goal[target])
+    end
+    return pose
+end
+
+function ProceduralNecromancer:_interpolate(current, goal)
     return goal
 end
