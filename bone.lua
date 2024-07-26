@@ -24,6 +24,7 @@ function Bone:new(name, bone, z, joint, transform)
         children = {},
         z = z,                  -- depth, used to determine draw order
         skelton = nil,          -- tracks owner
+        skin = nil,             -- texture to map onto bone
         transform = transform,
         joint = joint           -- offset to its joint
     }
