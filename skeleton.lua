@@ -223,10 +223,12 @@ function ProceduralSkeleton:pod()
 
     pskeleton.__totype = "proceduralskeleton"
 
+    --[[ nyi
     pskeleton["necromancers"] = {}
     for necromancer in all(self.necromancers) do
-        add(pskeleton.necromancers, necromancer)
+        add(pskeleton.necromancers, necromancer:pod())
     end
+    ]]
 
     return pskeleton
 end
