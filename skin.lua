@@ -19,6 +19,9 @@ Skin.__type = "skin"
 Skin.__parenttype = "skin"
 
 function Skin:new(sprite_num, offset)
+
+    if (type(sprite_num) == "table" and sprite_num.__type == "pod") return Skin:unpod(sprite_num)
+
     if (not offset) offset = Vec:new()
 
     local s = {
@@ -42,6 +45,26 @@ function Skin:draw(offset)
 
     spr(self.sn, s.x, s.y)
 end
+
+function Skin:pod()
+    local skin = {}
+
+    skin["__type"] = "pod"
+    skin["__totype"] = "skin"
+
+    skin["sn"] = self.sn
+    skin["offset"] = {x = self.offset.x, y = self.offset.y}
+
+    return skin
+end
+
+function Skin:unpod(tbl)
+    return Skin:new(
+        tbl.sn,
+        Vec:new(tbl.offset.x, tbl.offset.y)
+    )
+end
+
 
 function Skin:__tostring()
     local str   = "Skin (#" .. self.sprite .. ", " .. self.bone.name .. ")"
