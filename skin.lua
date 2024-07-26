@@ -126,7 +126,7 @@ end
 function TextureSkin:pod()
     local tskin = Skin.pod(self)
 
-    skin["__totype"] = "textureskin"
+    tskin["__totype"] = "textureskin"
 
     tskin["tsize"] = {x = self.tsize.x, y = self.tsize.y}
     tskin["toffset"] = {x = self.toffset.x, y = self.toffset.y}
