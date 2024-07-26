@@ -126,6 +126,8 @@ end
 function TextureSkin:pod()
     local tskin = Skin.pod(self)
 
+    skin["__totype"] = "textureskin"
+
     tskin["tsize"] = {x = self.tsize.x, y = self.tsize.y}
     tskin["toffset"] = {x = self.toffset.x, y = self.toffset.y}
 
@@ -195,6 +197,9 @@ end
 
 function RSkin:pod()
     local rskin = Skin.pod(self)
+
+    skin["__totype"] = "rskin"
+
     rskin["joint"] = {x = self.joint.x, y = self.joint.y}
 
     return rskin
