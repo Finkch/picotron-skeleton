@@ -89,6 +89,8 @@ TextureSkin.__type = "textureskin"
 setmetatable(TextureSkin, Skin)
 
 function TextureSkin:new(sprite_num, offset, tsize, toffset)
+    
+    if (type(sprite_num) == "table" and sprite_num.__type == "pod") return TextureSkin:unpod(sprite_num)
 
     local sprite = get_spr(sprite_num)
     if (not toffset)    toffset = Vec:new()
@@ -118,6 +120,24 @@ function TextureSkin:draw(offset)
         e.x, e.y,       -- x1, y1
         ts.x, ts.y,     -- texture x0, y0
         te.x, te.y      -- texture x1, y1
+    )
+end
+
+function TextureSkin:pod()
+    local tskin = Skin.pod(self)
+
+    tskin["tsize"] = {x = self.tsize.x, y = self.tsize.y}
+    tskin["toffset"] = {x = self.toffset.x, y = self.toffset.y}
+
+    return tski
+end
+
+function TextureSkin:unpod(tbl)
+    return TextureSkin:new(
+        tbl.sn,
+        Vec:new(tbl.offset.x, tbl.offset.y),
+        Vec:new(tbl.tsize.x, tbl.tsize.y),
+        Vec:new(tbl.toffset.x, tbl.toffset.y)
     )
 end
 
