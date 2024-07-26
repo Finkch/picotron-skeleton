@@ -15,7 +15,7 @@ Skeleton.__type = "skeleton"
 
 function Skeleton:new(core, necromancer, debug)
 
-    if (core.__type == "pod") return Skeleton:depod(core)
+    if (type(core) == "table" and core.__type == "pod") return Skeleton:depod(core)
     
     if (not necromancer) necromancer = Necromancer:new()
 
