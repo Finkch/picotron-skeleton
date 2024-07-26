@@ -203,6 +203,12 @@ function ProceduralNecromancer:update()
 end
 
 
+-- currently non-functional pods
+function ProceduralNecromancer:pod() error("nyi") end
+
+function ProceduralNecromancer:depod() error("nyi") end
+
+
 --[[
     the following methods are intended to be overridden!
     
