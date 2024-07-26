@@ -18,7 +18,7 @@ function Keyframe:new(duration, transforms)
     if (not duration) duration = 30
     if (not transforms) transforms = {}
 
-    if (duration.__type == "pod") return Keyframe.depod(nil, duration)
+    if (type(duration) == "table" and duration.__type == "pod") return Keyframe.depod(nil, duration)
 
     local k = {
         duration = duration,        -- frames for which to play this keyframe
