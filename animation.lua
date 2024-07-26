@@ -97,7 +97,7 @@ end
 
 -- metamethods
 function Animation:__tostring()
-    local str = self.name .. " (Animation, " .. self.duration .. ")"
+    local str = tostr(self.name) .. " (Animation, " .. self.duration .. ")"
 
     local strs = {}
     for i = 1, #self.keyframes do
