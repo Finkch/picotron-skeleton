@@ -123,6 +123,10 @@ end
 function Skeleton:pod()
     local skeleton = {}
 
+    -- adds types to the pod
+    skelton.__type = "pod"
+    skelton.__totype = "skeleton"
+
     -- adds each bone to the grave
     skeleton["core"] = self.core:pod()
     skeleton["debug"] = self.debug
