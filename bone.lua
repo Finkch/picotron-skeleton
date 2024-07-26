@@ -5,6 +5,7 @@
 
 include("lib/vec.lua")
 include("picotron-skeleton/transform.lua")
+include("picotron-skeleton/skin.lua")
 
 Bone = {}
 Bone.__index = Bone
@@ -136,6 +137,8 @@ function Bone:pod()
     bone["z"]       = self.z
     bone["joint"]   = {x = self.joint.x, y = self.joint.y}
 
+    if (self.skin) bone["skin"] = self.skin:pod()
+
     -- adds each child
     bone["children"] = {}
     for name, child in pairs(self.children) do
@@ -152,6 +155,19 @@ function Bone:unpod(tbl, parent)
         tbl.z,
         Vec:new(tbl.joint.x, tbl.joint.y)
     )
+
+    -- adds skin, if there is one
+    if (tbl.skin) then
+        if (tbl.skin.__totype == "skin") then
+            bone:add(Skin:new(tbl.skin))
+        elseif (tbl.skin.__totype == "textureskin") then
+            bone:add(TextureSkin:new(tbl.skin))
+        elseif ((tbl.skin.__totype == "rskin")) then
+            bone:add(RSkin:new(tbl.skin))
+        else
+            error("invalid skin to attach to bone \"" .. tostr(tbl.__totype) .. "\"")
+        end
+    end
 
     -- add the child bone to the parent bone
     if (parent) parent:add(bone)
