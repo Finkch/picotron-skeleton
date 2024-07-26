@@ -199,3 +199,19 @@ function ProceduralSkeleton:addnecromancer(necromancer)
     necromancer.skeleton = self
     add(self.necromancers, necromancer)
 end
+
+
+-- puts the skeleton into a grave
+-- (returns a pod for the skeleton).
+function ProceduralSkeleton:pod()
+    local pskeleton = Skeleton.pod(self)
+
+    pskeleton.__totype = "proceduralskeleton"
+
+    pskeleton["necromancers"] = {}
+    for necromancer in all(self.necromancers) do
+        add(pskeleton.necromancers, necromancer)
+    end
+
+    return pskeleton
+end
