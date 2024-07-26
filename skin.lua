@@ -164,6 +164,9 @@ RSkin.__type = "rskin"
 setmetatable(RSkin, Skin)
 
 function RSkin:new(sprite_num, offset, joint)
+
+    if (type(sprite_num) == "table" and sprite_num.__type == "pod") return RSkin:unpod(sprite_num)
+
     local rs = Skin:new(sprite_num, offset)
     rs["joint"] = joint
     rs["sprite"] = get_spr(sprite_num)
@@ -187,6 +190,21 @@ function RSkin:draw(offset)
         s,          -- position
         self.rot,   -- rotation amount
         self.joint  -- rotation centre
+    )
+end
+
+function RSkin:pod()
+    local rskin = Skin.pod(self)
+    rskin["joint"] = {x = self.joint.x, y = self.joint.y}
+
+    return rskin
+end
+
+function RSkin:unpod(tbl)
+    return RSkin:new(
+        tbl.sn,
+        Vec:new(tbl.offset.x, tbl.offset.y),
+        Vec:new(tbl.joint.x, tbl.joint.y)
     )
 end
 
