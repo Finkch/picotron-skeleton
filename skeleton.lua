@@ -126,8 +126,8 @@ function Skeleton:pod()
     local skeleton = {}
 
     -- adds types to the pod
-    skelton["__type"] = "pod"
-    skelton["__totype"] = "skeleton"
+    skeleton["__type"] = "pod"
+    skeleton["__totype"] = "skeleton"
 
     -- adds each bone to the grave
     skeleton["core"] = self.core:pod()
