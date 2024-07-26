@@ -179,6 +179,9 @@ ProceduralSkeleton.__type = "proceduralskeleton"
 setmetatable(ProceduralSkeleton, Skeleton)
 
 function ProceduralSkeleton:new(core, necromancer, debug)
+
+    if (type(core) == "table" and core.__type == "pod") return ProceduralSkeleton:depod(core)
+
     local ps = Skeleton:new(core, necromancer, debug)
     ps["necromancers"] = {}
 
@@ -226,4 +229,11 @@ function ProceduralSkeleton:pod()
     end
 
     return pskeleton
+end
+
+-- this does not copy pnecromancers (yet)!
+function ProceduralSkeleton:depod(tbl)
+    local skeleton = Skeleton.depod(self, tbl)
+
+    return ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, skeleton.debug)
 end
