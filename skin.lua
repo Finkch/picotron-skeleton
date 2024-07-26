@@ -198,7 +198,7 @@ end
 function RSkin:pod()
     local rskin = Skin.pod(self)
 
-    skin["__totype"] = "rskin"
+    rskin["__totype"] = "rskin"
 
     rskin["joint"] = {x = self.joint.x, y = self.joint.y}
 
