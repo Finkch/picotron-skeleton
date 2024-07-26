@@ -18,7 +18,7 @@ function Keyframe:new(duration, transforms)
     if (not duration) duration = 30
     if (not transforms) transforms = {}
 
-    if (type(duration) == "table" and duration.__type == "pod") return Keyframe:depod(duration)
+    if (type(duration) == "table" and duration.__type == "pod") return Keyframe:unpod(duration)
 
     local k = {
         duration = duration,        -- frames for which to play this keyframe
@@ -66,7 +66,7 @@ function Keyframe:pod()
     return keyframe
 end
 
-function Keyframe:depod(tbl)
+function Keyframe:unpod(tbl)
     local transforms = {}
     for bone, transformtbl in pairs(tbl.transforms) do
         transforms[bone] = Transform:new(transformtbl)

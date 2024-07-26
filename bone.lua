@@ -12,7 +12,7 @@ Bone.__type = "bone"
 
 function Bone:new(name, bone, z, joint, transform)
 
-    if (name.__type == "pod") return Bone:depod(name)
+    if (name.__type == "pod") return Bone:unpod(name)
 
     joint = joint or Vec:new()
     transform = transform or Transform:new()
@@ -144,7 +144,7 @@ function Bone:pod()
     return bone
 end
 
-function Bone:depod(tbl, parent)
+function Bone:unpod(tbl, parent)
     local bone = Bone:new(
         tbl.name,
         Vec:new(tbl.bone.x, tbl.bone.y),
@@ -157,7 +157,7 @@ function Bone:depod(tbl, parent)
     
     -- recurses to find children
     for _, childtbl in pairs(tbl.children) do
-        local child = Bone:depod(childtbl, bone)
+        local child = Bone:unpod(childtbl, bone)
     end
 
     return bone

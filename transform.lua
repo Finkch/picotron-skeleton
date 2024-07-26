@@ -12,7 +12,7 @@ Transform.__type = "transform"
 function Transform:new(pos, rot)
     pos = pos or Vec:new()
 
-    if (pos.__type == "pod") return Transform:depod(pos)
+    if (pos.__type == "pod") return Transform:unpod(pos)
 
     rot = rot or 0
     local t = {
@@ -48,7 +48,7 @@ function Transform:pod()
     return transform
 end
 
-function Transform:depod(tbl)
+function Transform:unpod(tbl)
     return Transform:new(
         Vec:new(tbl.pos.x, tbl.pos.y),
         tbl.rot

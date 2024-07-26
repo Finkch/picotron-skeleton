@@ -14,7 +14,7 @@ Animation.__type = "animation"
 
 function Animation:new(name, keyframes)
 
-    if (type(name) == "table" and name.__type == "pod") return Animation:depod(name)
+    if (type(name) == "table" and name.__type == "pod") return Animation:unpod(name)
 
     if (not keyframes) keyframes = {Keyframe:new()}
 
@@ -99,7 +99,7 @@ function Animation:pod()
     return animation
 end
 
-function Animation:depod(tbl)
+function Animation:unpod(tbl)
     local keyframes = {}
     for i = 1, #tbl.keyframes do
         keyframes[i] = Keyframe:new(tbl.keyframes[i])

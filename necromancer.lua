@@ -22,7 +22,7 @@ function Necromancer:new(animations)
         animations["idle"] = Animation:new("idle")
     end
 
-    if (animations.__type == "pod") return Necromancer:depod(animations)
+    if (animations.__type == "pod") return Necromancer:unpod(animations)
 
     -- ensures there is an empty animation (to play skeleton default)
     animations["empty"] = Animation:new("empty", {})
@@ -140,7 +140,7 @@ function Necromancer:pod()
     return necromancer
 end
 
-function Necromancer:depod(tbl)
+function Necromancer:unpod(tbl)
     local animations = {}
     for name, animationtbl in pairs(tbl) do
         animations[name] = Animation:new(animationtbl)
@@ -206,7 +206,7 @@ end
 -- currently non-functional pods
 function ProceduralNecromancer:pod() error("nyi") end
 
-function ProceduralNecromancer:depod() error("nyi") end
+function ProceduralNecromancer:unpod() error("nyi") end
 
 
 --[[

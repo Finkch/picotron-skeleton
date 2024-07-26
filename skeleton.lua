@@ -15,7 +15,7 @@ Skeleton.__type = "skeleton"
 
 function Skeleton:new(core, necromancer, debug)
 
-    if (type(core) == "table" and core.__type == "pod") return Skeleton:depod(core)
+    if (type(core) == "table" and core.__type == "pod") return Skeleton:unpod(core)
     
     if (not necromancer) necromancer = Necromancer:new()
 
@@ -139,7 +139,7 @@ function Skeleton:pod()
     return skeleton
 end
 
-function Skeleton:depod(tbl)
+function Skeleton:unpod(tbl)
     local core = Bone:new(tbl.core)
 
     local necromancer = Necromancer:new(tbl.necromancer)
@@ -180,7 +180,7 @@ setmetatable(ProceduralSkeleton, Skeleton)
 
 function ProceduralSkeleton:new(core, necromancer, debug)
 
-    if (type(core) == "table" and core.__type == "pod") return ProceduralSkeleton:depod(core)
+    if (type(core) == "table" and core.__type == "pod") return ProceduralSkeleton:unpod(core)
 
     local ps = Skeleton:new(core, necromancer, debug)
     ps["necromancers"] = {}
@@ -232,8 +232,8 @@ function ProceduralSkeleton:pod()
 end
 
 -- this does not copy pnecromancers (yet)!
-function ProceduralSkeleton:depod(tbl)
-    local skeleton = Skeleton.depod(self, tbl)
+function ProceduralSkeleton:unpod(tbl)
+    local skeleton = Skeleton.unpod(self, tbl)
 
     return ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, skeleton.debug)
 end
