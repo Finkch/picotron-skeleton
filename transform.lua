@@ -11,6 +11,9 @@ Transform.__type = "transform"
 
 function Transform:new(pos, rot)
     pos = pos or Vec:new()
+
+    if (pos.__type == "pod") return Transform.depod(nil, pos)
+
     rot = rot or 0
     local t = {
         pos = pos,
@@ -39,6 +42,13 @@ function Transform:pod()
     transform["rot"] = self.rot
 
     return transform
+end
+
+function Transform:depod(tbl)
+    return Transform:new(
+        Vec:new(tbl.pos.x, tbl.pos.y),
+        tbl.rot
+    )
 end
 
 

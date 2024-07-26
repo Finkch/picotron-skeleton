@@ -11,6 +11,9 @@ Bone.__index = Bone
 Bone.__type = "bone"
 
 function Bone:new(name, bone, z, joint, transform)
+
+    if (name.__type == "pod") return Bone.depod(nil, name)
+
     joint = joint or Vec:new()
     transform = transform or Transform:new()
     transform.pos += joint
@@ -132,6 +135,25 @@ function Bone:pod()
     bone["children"] = {}
     for name, child in pairs(self.children) do
         bone.children[name] = child:pod()
+    end
+
+    return bone
+end
+
+function Bone:depod(tbl, parent)
+    local bone = Bone:new(
+        tbl.name,
+        Vec:new(tbl.bone.x, tbl.bone.y),
+        tbl.z,
+        Vec:new(tbl.joint.x, tbl.joint.y)
+    )
+
+    -- add the child bone to the parent bone
+    if (parent) parent:add(bone)
+    
+    -- recurses to find children
+    for _, childtbl in pairs(tbl.children) do
+        local child = bone:depod(childtbl, bone)
     end
 
     return bone

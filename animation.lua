@@ -14,6 +14,8 @@ Animation.__type = "animation"
 
 function Animation:new(name, keyframes)
 
+    if (name.__type == "pod") return Animation.depod(nil, name)
+
     if (not keyframes) keyframes = {Keyframe:new()}
 
     local a = {
@@ -91,6 +93,15 @@ function Animation:pod()
     end
 
     return animation
+end
+
+function Animation:depod(tbl)
+    local keyframes = {}
+    for i = 1, #tbl.keyframes do
+        keyframes[i] = Keyframe:new(tbl.keyframes[i])
+    end
+
+    return Animation:new(tbl.name, keyframes)
 end
 
 

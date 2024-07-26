@@ -18,6 +18,8 @@ function Keyframe:new(duration, transforms)
     if (not duration) duration = 30
     if (not transforms) transforms = {}
 
+    if (duration.__type == "pod") return Keyframe.depod(nil, duration)
+
     local k = {
         duration = duration,        -- frames for which to play this keyframe
         transforms = transforms,    -- a table of transforms for all joints (from base model to reach this pose)
@@ -58,6 +60,15 @@ function Keyframe:pod()
     end
 
     return keyframe
+end
+
+function Keyframe:depod(tbl)
+    local transforms = {}
+    for bone, transformtbl in pairs(tbl.transforms) do
+        transforms[bone] = Transform:new(transformtbl)
+    end
+
+    return Keyframe:new(tbl.duration, transforms)
 end
 
 

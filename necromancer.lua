@@ -22,6 +22,8 @@ function Necromancer:new(animations)
         animations["idle"] = Animation:new("idle")
     end
 
+    if (animations.__type == "pod") return Necromancer.depod(nil, animations)
+
     -- ensures there is an empty animation (to play skeleton default)
     animations["empty"] = Animation:new("empty", {})
 
@@ -132,6 +134,15 @@ function Necromancer:pod()
     end
 
     return necromancer
+end
+
+function Necromancer:depod(tbl)
+    local animations = {}
+    for name, animationtbl in pairs(tbl) do
+        animations[name] = Animation.new(nil, animationtbl)
+    end
+
+    return Necromancer:new(animations)
 end
 
 

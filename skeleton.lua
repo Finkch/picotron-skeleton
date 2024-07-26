@@ -14,6 +14,8 @@ Skeleton.__index = Skeleton
 Skeleton.__type = "skeleton"
 
 function Skeleton:new(core, necromancer, debug)
+
+    if (core.__type == "pod") return Skeleton.depod(nil, core)
     
     if (not necromancer) necromancer = Necromancer:new()
 
@@ -133,6 +135,16 @@ function Skeleton:pod()
 
     -- adds the necromancer to the grave
     skeleton["necromancer"] = self.necromancer:pod(skeleton)
+
+    return skeleton
+end
+
+function Skeleton:depod(tbl)
+    local core = Bone:new(tbl.core)
+
+    local necromancer = Necromancer:new(tbl.necromancer)
+
+    local skeleton = Skeleton:new(core, necromancer, tbl.debug)
 
     return skeleton
 end
