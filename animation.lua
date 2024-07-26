@@ -84,6 +84,10 @@ end
 function Animation:pod()
     local animation = {}
 
+    -- adds types to the pod
+    animation["__type"] = "pod"
+    animation["__totype"] = "animation"
+
     animation["name"] = self.name
 
     -- adds keyframes

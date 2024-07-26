@@ -38,6 +38,10 @@ end
 function Transform:pod()
     local transform = {}
 
+    -- adds types to the pod
+    transform["__type"] = "pod"
+    transform["__totype"] = "transform"
+
     transform["pos"] = {x = self.pos.x, y = self.pos.y}
     transform["rot"] = self.rot
 

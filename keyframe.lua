@@ -51,6 +51,10 @@ end
 function Keyframe:pod()
     local keyframe = {}
 
+    -- adds types to the pod
+    keyframe["__type"] = "pod"
+    keyframe["__totype"] = "keyframe"
+
     keyframe["duration"] = self.duration
 
     -- adds transforms

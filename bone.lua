@@ -124,6 +124,10 @@ end
 function Bone:pod()
     local bone = {}
 
+    -- adds types to the pod
+    bone["__type"] = "pod"
+    bone["__totype"] = "bone"
+
     -- adds each component to the pod.
     -- note: no need to care about transform since its transient
     bone["name"]    = tostr(self.name)

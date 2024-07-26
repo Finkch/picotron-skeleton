@@ -129,6 +129,10 @@ end
 function Necromancer:pod()
     local necromancer = {}
 
+    -- adds types to the pod
+    necromancer["__type"] = "pod"
+    necromancer["__totype"] = "necromancer"
+
     for name, animation in pairs(self.animations) do
         necromancer[name] = animation:pod()
     end
