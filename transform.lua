@@ -12,7 +12,7 @@ Transform.__type = "transform"
 function Transform:new(pos, rot)
     pos = pos or Vec:new()
 
-    if (pos.__type == "pod") return Transform.depod(nil, pos)
+    if (pos.__type == "pod") return Transform:depod(pos)
 
     rot = rot or 0
     local t = {

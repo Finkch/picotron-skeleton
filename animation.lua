@@ -14,7 +14,7 @@ Animation.__type = "animation"
 
 function Animation:new(name, keyframes)
 
-    if (name.__type == "pod") return Animation.depod(nil, name)
+    if (name.__type == "pod") return Animation:depod(name)
 
     if (not keyframes) keyframes = {Keyframe:new()}
 
