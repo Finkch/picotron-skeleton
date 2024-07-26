@@ -143,7 +143,7 @@ end
 function Necromancer:depod(tbl)
     local animations = {}
     for name, animationtbl in pairs(tbl) do
-        animations[name] = Animation:new(nil, animationtbl)
+        animations[name] = Animation:new(animationtbl)
     end
 
     return Necromancer:new(animations)
