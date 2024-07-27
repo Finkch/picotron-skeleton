@@ -133,8 +133,10 @@ function Necromancer:pod()
     necromancer["__type"] = "pod"
     necromancer["__totype"] = "necromancer"
 
+    necromancer["animations"] = {}
+
     for name, animation in pairs(self.animations) do
-        necromancer[name] = animation:pod()
+        necromancer.animations[name] = animation:pod()
     end
 
     return necromancer
@@ -142,7 +144,7 @@ end
 
 function Necromancer:unpod(tbl)
     local animations = {}
-    for name, animationtbl in pairs(tbl) do
+    for name, animationtbl in pairs(tbl.animations) do
         animations[name] = Animation:new(animationtbl)
     end
 
