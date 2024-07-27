@@ -88,7 +88,7 @@ function Skeleton:_findbones(current_bone)
 
         -- places bone in z-array
         for i = 1, #self.z do
-            if (bone.z > self.bones[self.z[i]].z) then
+            if (bone.z < self.bones[self.z[i]].z) then
                 add(self.z, bone.name, i)
                 break
             elseif (i == #self.z) then -- in case the bone is the smallest z
