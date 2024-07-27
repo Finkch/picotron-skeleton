@@ -54,8 +54,8 @@ end
 -- draws the skeleton
 function Skeleton:draw(offset)
     offset = offset or {x = 0, y = 0} -- converts model coordinates to world coordinates
-    for _, bone in pairs(self.bones) do
-        bone:draw(offset)
+    for bone in all(self.z) do  -- draws bones in z-order
+        self.bones[bone]:draw(offset)
     end
 
     -- draws origin
