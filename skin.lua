@@ -68,7 +68,7 @@ end
 
 function Skin:__tostring()
     local str   = "Skin (#" .. self.sn .. ", " .. self.bone.name .. ")"
-    str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ")"
+    str       ..= "\n-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ")"
 
     return str
 end
@@ -145,8 +145,8 @@ end
 function TextureSkin:__tostring()
     local str   = Skin.__tostring(self)
 
-    str       ..= "-> Tex Offset:\t (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
-    str       ..= "-> Tex Size:\t (" .. self.tsize.x .. ", " .. self.tsize.y .. ")"
+    str       ..= "\n-> Tex Offset:\t (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
+    str       ..= "\n-> Tex Size:\t (" .. self.tsize.x .. ", " .. self.tsize.y .. ")"
 
     return str
 end
@@ -215,8 +215,8 @@ end
 
 function RSkin:__tostring()
     local str   = Skin.__tostring(self)
-    str       ..= "-> joint:\t" .. self.joint.x .. ", " .. self.joint.y
-    str       ..= "-> rotation:\t" .. self.rot
+    str       ..= "\n-> joint:\t" .. self.joint.x .. ", " .. self.joint.y
+    str       ..= "\n-> rotation:\t" .. self.rot
 
     return str
 end
