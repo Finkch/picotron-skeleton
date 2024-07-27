@@ -239,3 +239,14 @@ function ProceduralSkeleton:unpod(tbl)
 
     return ProceduralSkeleton:new(skeleton.core, skeleton.necromancer, skeleton.debug)
 end
+
+-- metamethods
+function ProceduralSkeleton:__tostring()
+    local str = Skeleton.__tostring(self)
+
+    for necromancer in all(self.necromancers) do
+        str ..= "\n" .. tostr(necromancer)
+    end
+
+    return str
+end
