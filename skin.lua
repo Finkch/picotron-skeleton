@@ -68,7 +68,6 @@ end
 
 function Skin:__tostring()
     local str   = "Skin (#" .. self.sn .. ", " .. self.bone.name .. ")"
-    str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y
     str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ")"
 
     return str
