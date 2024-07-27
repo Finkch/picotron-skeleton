@@ -144,7 +144,7 @@ function TextureSkin:unpod(tbl)
 end
 
 function Skin:__tostring()
-    local str   = "Skin (#" .. self.sprite .. ", " .. self.bone.name .. ")"
+    local str   = "Skin (#" .. self.sn .. ", " .. self.bone.name .. ")"
     str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y .. " <- " .. self.tsize.x .. "x" .. self.tsize.y
     str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ") <- (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
 
