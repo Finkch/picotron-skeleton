@@ -34,10 +34,11 @@ function Skeleton:new(core, necromancer, debug)
     debug = debug or false
 
     local s = {
-        core = core,
-        bones = {},
-        necromancer = necromancer,
-        debug = debug       -- shows skeleton as coloured lines
+        core = core,                -- root bone
+        bones = {},                 -- quick access to all bones
+        z = {},                     -- bones sorted by z for draw
+        necromancer = necromancer,  -- in charge of animations
+        debug = debug               -- shows skeleton as coloured lines
     }
 
     necromancer.skeleton = s
@@ -69,10 +70,12 @@ end
 
 
 -- sets the list of bones, recursing down children
--- also gives the bones a reference to their owner
+-- also gives the bones a reference to their owner.
+-- also also creates z-sorted list
 function Skeleton:findbones()
     self.bones[self.core.name] = self.core
     self.core.skeleton = self
+    add(self.z, self.core.name)
     self:_findbones(self.core)
 end
 
@@ -82,6 +85,16 @@ function Skeleton:_findbones(current_bone)
         self.bones[bone.name] = bone
         bone.skeleton = self
         bone.transform.pos += tip   -- attatches bone
+
+        -- places bone in z-array
+        for i = 1, #self.z do
+            if (bone.z > self.z[i].z) then
+                add(self.z, bone.name, i)
+                break
+            elseif (i == #self.z) then -- in case the bone is the smallest z
+                add(self.z, bone.name)
+            end
+        end
 
         self:_findbones(bone)       -- recurses, finding bones of current's children
     end
