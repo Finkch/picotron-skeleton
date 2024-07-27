@@ -29,7 +29,7 @@ function Necromancer:new(animations)
 
     local n = {
         animations = animations,
-        current = animations["idle"],   -- current animation
+        current = animations["empty"],  -- current animation
         previous = nil,                 -- previous animation
         interpolator = nil,             -- function used to interpolate between poses
         frame = 0,                      -- frame/time
