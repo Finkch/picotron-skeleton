@@ -143,9 +143,10 @@ function TextureSkin:unpod(tbl)
 end
 
 function TextureSkin:__tostring()
-    local str   = "Skin (#" .. self.sn .. ", " .. self.bone.name .. ")"
-    str       ..= "-> Size:\t" .. self.size.x .. "x" .. self.size.y .. " <- " .. self.tsize.x .. "x" .. self.tsize.y
-    str       ..= "-> Offset:\t (" .. self.offset.x .. ", " .. self.offset.y .. ") <- (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
+    local str   = Skin.__tostring(self)
+
+    str       ..= "-> Tex Offset:\t (" .. self.toffset.x .. ", " .. self.toffset.y .. ")"
+    str       ..= "-> Tex Size:\t (" .. self.tsize.x .. ", " .. self.tsize.y .. ")"
 
     return str
 end
@@ -213,9 +214,9 @@ function RSkin:unpod(tbl)
 end
 
 function RSkin:__tostring()
-    local str = Skin.__tostring(self)
-    str ..= "-> joint:\t" .. self.joint.x .. ", " .. self.joint.y
-    str ..= "-> rotation:\t" .. self.rot
+    local str   = Skin.__tostring(self)
+    str       ..= "-> joint:\t" .. self.joint.x .. ", " .. self.joint.y
+    str       ..= "-> rotation:\t" .. self.rot
 
     return str
 end
