@@ -130,7 +130,7 @@ function TextureSkin:pod()
     tskin["tsize"] = {x = self.tsize.x, y = self.tsize.y}
     tskin["toffset"] = {x = self.toffset.x, y = self.toffset.y}
 
-    return tski
+    return tskin
 end
 
 function TextureSkin:unpod(tbl)
