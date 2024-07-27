@@ -118,7 +118,7 @@ function Necromancer:emptypose()
     local transforms = {}
     
     for name, bone in pairs(self.skeleton.bones) do
-        transforms[bone] = Transform:new()
+        transforms[name] = Transform:new()
     end
 
     return transforms
