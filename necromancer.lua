@@ -232,12 +232,12 @@ end
 function ProceduralNecromancer:get()
     local pose = {}
     for target in all(self.targets) do
-        pose[target] = self:_get(target)
+        pose[target] = self:_get(target, pose)
     end
     return pose
 end
 
-function ProceduralNecromancer:_get(bone)
+function ProceduralNecromancer:_get(bone, pose)
     return Transform:new()
 end
 
