@@ -22,6 +22,7 @@ function Bone:new(name, bone, z, joint, transform)
     local b = {
         name = name,
         bone = bone,            -- vector that represents the bone itself; length and orientation
+        length = bone:mag(),    -- only need to get its length the once
         children = {},
         z = z,                  -- depth, used to determine draw order
         skelton = nil,          -- tracks owner
